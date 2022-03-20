@@ -16,10 +16,10 @@ function onTimer() {
 }
 
 
-setTimeout(FetchData1, 15000)
+setTimeout(FetchData1, 10000)
 	function FetchData1(){
 		if (!gameOver){
-		document.getElementById(0).innerText = year;
+		document.getElementById(0).innerText = catg;
 		}
 	}	
 
@@ -33,7 +33,7 @@ setTimeout(FetchData2, 30000)
 setTimeout(FetchData3, 45000)
 	function FetchData3(){
 		if (!gameOver){
-		document.getElementById(2).innerText = catg;
+		document.getElementById(2).innerText = year;
 		}
 	}
 
@@ -42,7 +42,7 @@ setTimeout(FetchData3, 45000)
 var gameOver = false;
 var yearList = ["1975","1975","1975","1975","1979","1979","1979","1979","1983","1983","1983","1983","1987","1987","1987","1987","1992","1992","1992","1992","1992","1996","1996","1996","1996","1996","1999","1999","1999","1999","1999","1999","2003","2003","2003","2003","2003","2007","2007","2007","2007","2007","2011","2011","2011","2011","2011","2011","2015","2015","2015","2015","2015","2015","2019","2019","2019","2019","2019"]
 var countryList = ["WIN","NZL","AUS","WIN","WIN","WIN","ENG","WIN","IND","ENG","IND","IND","AUS","ENG","AUS","AUS","PAK","NZL","PAK","PAK","NZL","SRL","IND","IND","SRL","SRL","AUS","IND","AUS","NZL","AUS","SAF","AUS","IND","SRL","AUS","IND","AUS","AUS","AUS","AUS","AUS","IND","SRL","PAK","IND","IND","IND","AUS","NZL","AUS","NZL","AUS","AUS","ENG","IND","AUS","ENG","NZL",] 
-var catgTypeList = ["WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","MS","WC","MR","MW","MF","MS","WC","MR","MW","MW","MF","MS","WC","MR","MW","MF","MS","WC","MR","MW","MF","MS","WC","MR","MW","MW","MF","MS","WC","MR","MW","MW","MF","MS","WC","MR","MW","MF","MS",]
+var catgTypeList = ["WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MF","PS",]
 var firstnameList = ["Clive","Glenn","Gary","Clive","Clive","Gordon","Mike","Vivian","Kapil","David","Roger","Mohinder","Allan","Graham","Craig","David","Imran","Martin","Wasim","Wasim","Martin","Arjuna","Sachin","Anil","Aravinda","Sanath","Steve","Rahul","Shane","Geoff","Shane","Lance","Ricky","Sachin","Chaminda","Ricky","Sachin","Ricky","Matthew","Glenn","Adam","Glenn","Mahendra","Tillakaratne","Shahid","Zaheer","Mahendra","Yuvraj","Michael","Martin","Mitchell","Trent","James","Mitchell","Eoin","Rohit","Mitchell","Ben","Kane",]
 var lastnameList = ["Lloyd","Turner","Gilmour","Lloyd","Lloyd","Greenidge","Hendrick","Richards","Dev","Gower","Binny","Amarnath","Border","Gooch","McDermott","Boon","Khan","Crowe","Akram","Akram","Crowe","Ranatunga","Tendulkar","Kumble","de Silva","Jayasuriya","Waugh","Dravid","Warne","Allott","Warne","Klusener","Ponting","Tendulkar","Vaas","Ponting","Tendulkar","Ponting","Hayden","McGrath","Gilchrist","McGrath","Singh Dhoni","Dilshan","Afridi","Khan","Singh Dhoni","Singh","Clarke","Guptill","Starc","Boult","Faulkner","Starc","Morgan","Sharma","Starc","Stokes","Williamson",]
 var index = [Math.floor(Math.random()*yearList.length)];
@@ -50,6 +50,23 @@ var firstname = firstnameList[index];
 var lastname = lastnameList[index];
 var year = yearList[index];
 var catg = catgTypeList[index];
+
+/* if (catg == "WC"){
+	catg = "Winning Captain";
+}
+if (catg == "MR"){
+	catg = "Most Runs";
+}
+if (catg == "MW"){
+	catg = "Most Wickets";
+}
+if (catg == "MF"){
+	catg = "Finals MOM";
+}
+if (catg == "PS"){
+	catg = "Player of the Series";
+} */
+
 var country = countryList[index];
 var fnwidth = firstname.length;
 var lnwidth = lastname.length;
@@ -115,13 +132,13 @@ function intialize() {
             clue.id = clueindex;
             clue.classList.add("clue-ball");
 			if (clueindex == 0){	
-            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Year</div>';
+            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Category</div>';
 			}
 			else if (clueindex == 1){	
             clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Country</div>';
 			}
 			else if (clueindex == 2){	
-            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Category</div>';
+            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Year</div>';
 			}				
             document.getElementById("clue-ball").appendChild(clue);
         }	
@@ -259,7 +276,7 @@ function update() {
 	
 	if (guess == answername) {
 		document.getElementById("answer").style.color = "green";
-		document.getElementById("answer").innerText = "You have identified the player successfully.\nCongratulations! Time Taken is " + (40-i) + " seconds";
+		document.getElementById("answer").innerText = "You have identified the player successfully.\nCongratulations! Time Taken is " + (60-i) + " seconds";
 		gameOver = true;
 		var hidecounter = document.getElementById("mycounter");
 		hidecounter.style.color = "black";
