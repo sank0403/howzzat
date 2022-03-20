@@ -40,7 +40,6 @@ setTimeout(FetchData3, 30000)
 // *****************************************************************************
 
 var gameOver = false;
-//console.log(gameType);
 var yearList = ["1975","1975","1975","1975","1979","1979","1979","1979","1983","1983","1983","1983","1987","1987","1987","1987","1992","1992","1992","1992","1992","1996","1996","1996","1996","1996","1999","1999","1999","1999","1999","1999","2003","2003","2003","2003","2003","2007","2007","2007","2007","2007","2011","2011","2011","2011","2011","2011","2015","2015","2015","2015","2015","2015","2019","2019","2019","2019","2019"]
 var countryList = ["WIN","NZL","AUS","WIN","WIN","WIN","ENG","WIN","IND","ENG","IND","IND","AUS","ENG","AUS","AUS","PAK","NZL","PAK","PAK","NZL","SRL","IND","IND","SRL","SRL","AUS","IND","AUS","NZL","AUS","SAF","AUS","IND","SRL","AUS","IND","AUS","AUS","AUS","AUS","AUS","IND","SRL","PAK","IND","IND","IND","AUS","NZL","AUS","NZL","AUS","AUS","ENG","IND","AUS","ENG","NZL",] 
 var catgTypeList = ["WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","MS","WC","MR","MW","MF","MS","WC","MR","MW","MW","MF","MS","WC","MR","MW","MF","MS","WC","MR","MW","MF","MS","WC","MR","MW","MW","MF","MS","WC","MR","MW","MW","MF","MS","WC","MR","MW","MF","MS",]
@@ -57,15 +56,13 @@ var lnwidth = lastname.length;
 var width = fnwidth + lnwidth;
 var answername = "";
 answername = firstname.concat(lastname).toLowerCase();
-console.log(firstname);
-console.log(lastname);
+//console.log(firstname);
+//console.log(lastname);
 
 document.getElementById("answer").style.color = "cyan";
 document.getElementById("answer").innerText = "Read the Game Rules to learn how to play.\n Timer in Progress - Refresh Page to reload!";
 var row = 0; //current guess (attempt #)
 var col = 0; //current letter for that attempt
-
-//var boardWidth = (width*30); 
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
 const overlay = document.getElementById('overlay')
@@ -104,7 +101,6 @@ function closeModal(modal) {
 }
 
 window.onload = function(){
-	//console.log("sankar");
     intialize();
 }
 
@@ -112,23 +108,6 @@ window.onload = function(){
 function intialize() {
 
     // Create the game board
-/* 	
-        for (let clueindex = 0; clueindex < 3; clueindex++) {
-            // <span id="0-0" class="tile">P</span>
-            let clue = document.createElement("span");
-            clue.id = clueindex;
-            clue.classList.add("clue-item");
-			if (clueindex == 0){	
-            clue.innerText = "Year";
-			}
-			else if (clueindex == 1){	
-            clue.innerText = "Country";
-			}
-			else if (clueindex == 2){	
-            clue.innerText = "Category";
-			}			
-            document.getElementById("clue-item").appendChild(clue);
-        } */
 
         for (let clueindex = 0; clueindex < 3; clueindex++) {
             // <span id="0-0" class="tile">P</span>
@@ -172,7 +151,6 @@ function intialize() {
         }
     //}	
 	
-
     // Create the key board
     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -278,20 +256,6 @@ function update() {
 
     guess = guess.toLowerCase(); //case sensitive
 	
-/*     if (gameMode == 1){
-		if (!gameOver && col < width) {
-			document.getElementById("answer").style.color = "red";
-			document.getElementById("answer").innerText = "Not enough letters!";
-			return;
-		}   
-	} */		
-
-/* 	if (!guessList.includes(guess)) {
-		document.getElementById("answer").style.color = "red";
-		document.getElementById("answer").innerText = "Not a valid  " +gameName +"  name!";
-		return;
-	}	 */
-
 	
 	if (guess == answername) {
 		document.getElementById("answer").style.color = "green";
@@ -310,81 +274,4 @@ function update() {
 		}		
 	}
 
-    //start processing guess
- /*    let correct = 0;
-
-    let letterCount = {}; //keep track of letter frequency, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
-    for (let i = 0; i < word.length; i++) {
-        let letter = word[i];
-
-        if (letterCount[letter]) {
-           letterCount[letter] += 1;
-        } 
-        else {
-           letterCount[letter] = 1;
-        }
-    }
-
-    //first iteration, check all the correct ones first
-    for (let c = 0; c < width; c++) {
-        let currTile = document.getElementById(row.toString() + '-' + c.toString());
-        let letter = currTile.innerText;
-		//Is it in the correct position?
-		if (word[c] == letter) {
-			currTile.classList.add("correct");
-		//disable hint button if first letter is correct 			
-			if (c == 0) {
-				document.getElementById("hint").disabled = true;
-				if (hintSwitch == 0){
-				document.getElementById("answer").style.color = "cyan";
-				document.getElementById("answer").innerText = "You have identified the First Letter.\nHint is now disabled.";	
-				}	
-			}
-			let keyTile = document.getElementById("Key" + letter);
-			keyTile.classList.remove("present");
-			keyTile.classList.add("correct");
-
-			correct += 1;
-			letterCount[letter] -= 1; //deduct the letter count
-		}
-
-	
-		if (correct == width) {
-			document.getElementById("answer").style.color = "green";
-			document.getElementById("answer").innerText = "Congratulations! \n You have identified the " +gameName +" successfully.";
-			gameOver = true;
-		}
-    }
-
-    //go again and mark which ones are present but in wrong position
-    for (let c = 0; c < width; c++) {
-        let currTile = document.getElementById(row.toString() + '-' + c.toString());
-        let letter = currTile.innerText;
-
-        // skip the letter if it has been marked correct
-        if (!currTile.classList.contains("correct")) {
-            //Is it in the word?         //make sure we don't double count
-            if (word.includes(letter) && letterCount[letter] > 0) {
-                currTile.classList.add("present");
-                
-                let keyTile = document.getElementById("Key" + letter);
-                if (!keyTile.classList.contains("correct")) {
-                    keyTile.classList.add("present");
-                }
-                letterCount[letter] -= 1;
-            } // Not in the word or (was in word but letters all used up to avoid overcount)
-            else {
-                currTile.classList.add("absent");
-                let keyTile = document.getElementById("Key" + letter);
-				if (keyTile !== null){
-					if (!keyTile.classList.contains("present") && !keyTile.classList.contains("correct")) {
-						keyTile.classList.add("absent");
-					}	
-				}
-            }
-        }
-    }
-
-    row += 1; //start new row
-    col = 0; //start at 0 for new row */
 }
