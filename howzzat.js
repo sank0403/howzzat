@@ -1,3 +1,9 @@
+window.localStorage;
+if (!localStorage.totalwins){
+localStorage.setItem("totalwins",0);
+localStorage.setItem("totaltime",0);
+}
+
 let i = 60;
 window.onload = onTimer();
 function onTimer() {
@@ -16,26 +22,40 @@ function onTimer() {
 }
 
 
-setTimeout(FetchData1, 10000)
+setTimeout(FetchData1, 5000)
 	function FetchData1(){
 		if (!gameOver){
 		document.getElementById(0).innerText = catg;
 		}
 	}	
 
-setTimeout(FetchData2, 30000)
+setTimeout(FetchData2, 15000)
 	function FetchData2(){
 		if (!gameOver){
 		document.getElementById(1).innerText = country;
 		}
 	}
 
-setTimeout(FetchData3, 45000)
+setTimeout(FetchData3, 25000)
 	function FetchData3(){
 		if (!gameOver){
 		document.getElementById(2).innerText = year;
 		}
 	}
+
+setTimeout(FetchData4, 35000)
+	function FetchData4(){
+		if (!gameOver){
+		document.getElementById(3).innerText = fnfl;
+		}
+	}
+
+setTimeout(FetchData5, 45000)
+	function FetchData5(){
+		if (!gameOver){
+		document.getElementById(4).innerText = lnfl;
+		}
+	}	
 
 // *****************************************************************************
 
@@ -44,13 +64,14 @@ var yearList = ["1975","1975","1975","1975","1979","1979","1979","1979","1983","
 var countryList = ["WIN","NZL","AUS","WIN","WIN","WIN","ENG","WIN","IND","ENG","IND","IND","AUS","ENG","AUS","AUS","PAK","NZL","PAK","PAK","NZL","SRL","IND","IND","SRL","SRL","AUS","IND","AUS","NZL","AUS","SAF","AUS","IND","SRL","AUS","IND","AUS","AUS","AUS","AUS","AUS","IND","SRL","PAK","IND","IND","IND","AUS","NZL","AUS","NZL","AUS","AUS","ENG","IND","AUS","ENG","NZL",] 
 var catgTypeList = ["WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MF","PS",]
 var firstnameList = ["Clive","Glenn","Gary","Clive","Clive","Gordon","Mike","Vivian","Kapil","David","Roger","Mohinder","Allan","Graham","Craig","David","Imran","Martin","Wasim","Wasim","Martin","Arjuna","Sachin","Anil","Aravinda","Sanath","Steve","Rahul","Shane","Geoff","Shane","Lance","Ricky","Sachin","Chaminda","Ricky","Sachin","Ricky","Matthew","Glenn","Adam","Glenn","Mahendra","Tillakaratne","Shahid","Zaheer","Mahendra","Yuvraj","Michael","Martin","Mitchell","Trent","James","Mitchell","Eoin","Rohit","Mitchell","Ben","Kane",]
-var lastnameList = ["Lloyd","Turner","Gilmour","Lloyd","Lloyd","Greenidge","Hendrick","Richards","Dev","Gower","Binny","Amarnath","Border","Gooch","McDermott","Boon","Khan","Crowe","Akram","Akram","Crowe","Ranatunga","Tendulkar","Kumble","de Silva","Jayasuriya","Waugh","Dravid","Warne","Allott","Warne","Klusener","Ponting","Tendulkar","Vaas","Ponting","Tendulkar","Ponting","Hayden","McGrath","Gilchrist","McGrath","Singh Dhoni","Dilshan","Afridi","Khan","Singh Dhoni","Singh","Clarke","Guptill","Starc","Boult","Faulkner","Starc","Morgan","Sharma","Starc","Stokes","Williamson",]
+var lastnameList = ["Lloyd","Turner","Gilmour","Lloyd","Lloyd","Greenidge","Hendrick","Richards","Dev","Gower","Binny","Amarnath","Border","Gooch","McDermott","Boon","Khan","Crowe","Akram","Akram","Crowe","Ranatunga","Tendulkar","Kumble","deSilva","Jayasuriya","Waugh","Dravid","Warne","Allott","Warne","Klusener","Ponting","Tendulkar","Vaas","Ponting","Tendulkar","Ponting","Hayden","McGrath","Gilchrist","McGrath","Singh Dhoni","Dilshan","Afridi","Khan","Singh Dhoni","Singh","Clarke","Guptill","Starc","Boult","Faulkner","Starc","Morgan","Sharma","Starc","Stokes","Williamson",]
 var index = [Math.floor(Math.random()*yearList.length)];
 var firstname = firstnameList[index];
 var lastname = lastnameList[index];
 var year = yearList[index];
 var catg = catgTypeList[index];
-
+var fnfl = firstname.slice(0, 1).toUpperCase();
+var lnfl = lastname.slice(0, 1).toUpperCase();
 /* if (catg == "WC"){
 	catg = "Winning Captain";
 }
@@ -73,9 +94,6 @@ var lnwidth = lastname.length;
 var width = fnwidth + lnwidth;
 var answername = "";
 answername = firstname.concat(lastname).toLowerCase();
-//console.log(firstname);
-//console.log(lastname);
-
 document.getElementById("answer").style.color = "cyan";
 document.getElementById("answer").innerText = "Read the Game Rules to learn how to play.\n Timer in Progress - Refresh Page to reload!";
 var row = 0; //current guess (attempt #)
@@ -126,7 +144,7 @@ function intialize() {
 
     // Create the game board
 
-        for (let clueindex = 0; clueindex < 3; clueindex++) {
+        for (let clueindex = 0; clueindex < 5; clueindex++) {
             // <span id="0-0" class="tile">P</span>
             let clue = document.createElement("span");
             clue.id = clueindex;
@@ -139,6 +157,12 @@ function intialize() {
 			}
 			else if (clueindex == 2){	
             clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Year</div>';
+			}	
+			else if (clueindex == 3){	
+            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">FN FL</div>';
+			}
+			else if (clueindex == 4){	
+            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">LN FL</div>';
 			}				
             document.getElementById("clue-ball").appendChild(clue);
         }	
@@ -252,12 +276,6 @@ function processInput(e) {
     else if (e.code == "Enter") {
         update();
     }
-
-/*     if (!gameOver && row == height) {
-        gameOver = true;
-		document.getElementById("answer").style.color = "red";
-        document.getElementById("answer").innerText = "The  " +gameName +"  was " + word + "! Try Again.";
-    } */
 }
 
 function update() {
@@ -275,11 +293,20 @@ function update() {
 	
 	
 	if (guess == answername) {
+		for (let c = 0; c < width; c++) {
+			let currTile = document.getElementById(1 + '-' + c.toString());
+			currTile.classList.add("correct");
+		}		
 		document.getElementById("answer").style.color = "green";
-		document.getElementById("answer").innerText = "You have identified the player successfully.\nCongratulations! Time Taken is " + (60-i) + " seconds";
+		localStorage.totalwins = Number(localStorage.totalwins)+1;
+		localStorage.totaltime = Number(localStorage.totaltime)+(60-i);
+		let averagetime = Math.round(localStorage.totaltime/localStorage.totalwins);
+		document.getElementById("answer").innerText = "You have identified the player successfully.\nCongrats! Total Wins: " + localStorage.totalwins + ". Average Time: " + averagetime + "s.";
+		//document.getElementById("answer").innerText = "You have identified the player successfully.\nCongrats! Total Wins: " + localStorage.totalwins + ". Average Time " + (60-i) + "s.";
 		gameOver = true;
 		var hidecounter = document.getElementById("mycounter");
 		hidecounter.style.color = "black";
+		
 	}	
 	else{
 		document.getElementById("answer").style.color = "red";

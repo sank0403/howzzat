@@ -18,7 +18,7 @@ hr {
     font-size: 30px;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-top: 0px;
+    margin-top: 10px;
 }
 
 #mycounter {
@@ -252,19 +252,26 @@ hr {
   }    
 }
 
+
 @media screen and (max-width: 399px) and (min-width: 350px) {
   .keyboard-row {
     width: 350px;
   }
   .key-tile {
-    width: 30px;
+    width: 31px;
   } 
   .enter-key-tile {
-    width: 65px;
+    width: 64px;
   }   
+  #board, #clue {
+    width: 325px;
+  }	
+  hr {
+	 width: 350px;
+  }  
 }
 
-@media screen and (max-width: 399px) and (min-width: 310px) {
+@media screen and (max-width: 349px) and (min-width: 310px) {
   .keyboard-row {
     width: 310px;
   }
@@ -274,4 +281,16 @@ hr {
   .enter-key-tile {
     width: 60px;
   }   
+  #board, #clue {
+    width: 300px;
+  }	
+  hr {
+	 width: 310px;
+  }    
+}
+
+
+@media screen and (max-height: 799px) {
+	#board {
+    height: 300px;
 }
