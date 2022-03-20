@@ -6,7 +6,7 @@ function onTimer() {
   if (i < 0)  {
 	if (!gameOver){  
 		document.getElementById("answer").style.color = "red";
-		document.getElementById("answer").innerText = "Time is up! You lose!\n The player was "+firstname+" "+lastname+"."+;
+		document.getElementById("answer").innerText = "Time is up! You lose!\n The player was "+firstname+" "+lastname+".";
 		gameOver = true;
 	}
   }
