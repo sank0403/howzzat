@@ -1,0 +1,16 @@
+{
+  "short_name": "Howzzat",
+  "name": "Howzzat",
+  "icons": [
+    {
+      "src": "https://sank0403.github.io/howzzat/gameicon.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "https://sank0403.github.io/howzzat/",
+  "background_color": "#000000",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "description": "A Test Against Time!"
+}
