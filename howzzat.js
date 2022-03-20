@@ -1,4 +1,4 @@
-let i = 40;
+let i = 60;
 window.onload = onTimer();
 function onTimer() {
   document.getElementById('mycounter').innerHTML = i;
@@ -6,7 +6,7 @@ function onTimer() {
   if (i < 0)  {
 	if (!gameOver){  
 		document.getElementById("answer").style.color = "red";
-		document.getElementById("answer").innerText = "Time is up! You lose!\n The player was "+firstname+" "+lastname;
+		document.getElementById("answer").innerText = "Time is up! You lose!\n The player was "+firstname+" "+lastname+"."+;
 		gameOver = true;
 	}
   }
@@ -16,21 +16,21 @@ function onTimer() {
 }
 
 
-setTimeout(FetchData1, 10000)
+setTimeout(FetchData1, 15000)
 	function FetchData1(){
 		if (!gameOver){
 		document.getElementById(0).innerText = year;
 		}
 	}	
 
-setTimeout(FetchData2, 20000)
+setTimeout(FetchData2, 30000)
 	function FetchData2(){
 		if (!gameOver){
 		document.getElementById(1).innerText = country;
 		}
 	}
 
-setTimeout(FetchData3, 30000)
+setTimeout(FetchData3, 45000)
 	function FetchData3(){
 		if (!gameOver){
 		document.getElementById(2).innerText = catg;
