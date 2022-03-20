@@ -290,7 +290,7 @@ hr {
 }
 
 
-@media screen and (max-height: 799px) {
+@media screen and (max-height: 749px) {
 	#board {
     height: 300px;
 }
