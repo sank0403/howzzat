@@ -2,6 +2,7 @@ window.localStorage;
 if (!localStorage.totalwins){
 localStorage.setItem("totalwins",0);
 localStorage.setItem("totaltime",0);
+localStorage.setItem("averagetime",0);
 }
 
 let i = 60;
@@ -200,6 +201,19 @@ function intialize() {
             document.getElementById("clue-ball").appendChild(clue);
         }	
 		
+        for (let statsindex = 5; statsindex < 7; statsindex++) {
+            // <span id="0-0" class="tile">P</span>
+            let stats = document.createElement("span");
+            stats.id = statsindex;
+            stats.classList.add("stats-item");
+			if (statsindex == 5){	
+            stats.innerHTML = "Total Wins: " + localStorage.totalwins;
+			}
+			else if (statsindex == 6){	
+            stats.innerHTML = "Avg. Time: " + localStorage.averagetime + "s";
+			}	
+            document.getElementById("stats-item").appendChild(stats);
+        }			
 
 
    // for (let r = 0; r < height; r++) {
@@ -332,10 +346,11 @@ function update() {
 		}		
 		document.getElementById("answer").style.color = "green";
 		localStorage.totalwins = Number(localStorage.totalwins)+1;
-		localStorage.totaltime = Number(localStorage.totaltime)+(60-i);
-		let averagetime = Math.round(localStorage.totaltime/localStorage.totalwins);
-		document.getElementById("answer").innerText = "You have identified the player successfully.\nCongrats! Total Wins: " + localStorage.totalwins + ". Average Time: " + averagetime + "s.";
-		//document.getElementById("answer").innerText = "You have identified the player successfully.\nCongrats! Total Wins: " + localStorage.totalwins + ". Average Time " + (60-i) + "s.";
+		localStorage.totaltime = Number(localStorage.totaltime)+(60-i);		
+		localStorage.averagetime = Math.round(localStorage.totaltime/localStorage.totalwins);
+		document.getElementById(5).innerText = "Total Wins: " + localStorage.totalwins;
+		document.getElementById(6).innerText = "Avg. Time: " + localStorage.averagetime + "s";
+		document.getElementById("answer").innerText = "You have identified the player successfully.\nCongrats! Time Taken: " + (60-i) + "s.";
 		gameOver = true;
 		var hidecounter = document.getElementById("mycounter");
 		hidecounter.style.color = "black";
