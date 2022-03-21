@@ -22,44 +22,77 @@ function onTimer() {
 }
 
 
-setTimeout(FetchData1, 5000)
-	function FetchData1(){
+setTimeout(FetchData, 5000)
+setTimeout(FetchData, 15000)
+setTimeout(FetchData, 25000)
+setTimeout(FetchData, 35000)
+setTimeout(FetchData, 45000)
+	function FetchData(){
 		if (!gameOver){
-		document.getElementById(0).innerText = catg;
+			var elementid = GetElemid(arrayid);
+			elementid = Number(elementid);
+			switch (elementid){
+				case 0: document.getElementById(0).innerText = year;
+				break;
+				case 1: document.getElementById(1).innerText = country;
+				break;
+				case 2: document.getElementById(2).innerText = catg;
+				break;
+				case 3: document.getElementById(3).innerText = fnfl;
+				break;
+				case 4: document.getElementById(4).innerText = lnfl;
+				break;	
+			}			
+			arrayid.splice(arrayid.indexOf(elementid),1)
 		}
 	}	
 
-setTimeout(FetchData2, 15000)
-	function FetchData2(){
-		if (!gameOver){
-		document.getElementById(1).innerText = country;
-		}
-	}
+function GetElemid(){
+	var arrayidind = [Math.floor(Math.random()*arrayid.length)];
+	var returnid = arrayid[arrayidind];
+	return returnid;
+}
+	
 
-setTimeout(FetchData3, 25000)
-	function FetchData3(){
-		if (!gameOver){
-		document.getElementById(2).innerText = year;
-		}
-	}
+	/* setTimeout(FetchData1, 5000)
+		function FetchData1(){
+			if (!gameOver){
+			document.getElementById(0).innerText = catg;
+			}
+		}	
 
-setTimeout(FetchData4, 35000)
-	function FetchData4(){
-		if (!gameOver){
-		document.getElementById(3).innerText = fnfl;
+	setTimeout(FetchData2, 15000)
+		function FetchData2(){
+			if (!gameOver){
+			document.getElementById(1).innerText = country;
+			}
 		}
-	}
 
-setTimeout(FetchData5, 45000)
-	function FetchData5(){
-		if (!gameOver){
-		document.getElementById(4).innerText = lnfl;
+	setTimeout(FetchData3, 25000)
+		function FetchData3(){
+			if (!gameOver){
+			document.getElementById(2).innerText = year;
+			}
 		}
-	}	
+
+	setTimeout(FetchData4, 35000)
+		function FetchData4(){
+			if (!gameOver){
+			document.getElementById(3).innerText = fnfl;
+			}
+		}
+
+	setTimeout(FetchData5, 45000)
+		function FetchData5(){
+			if (!gameOver){
+			document.getElementById(4).innerText = lnfl;
+			}
+		}	 */
 
 // *****************************************************************************
 
 var gameOver = false;
+var arrayid = [0,1,2,3,4]
 var yearList = ["1975","1975","1975","1975","1979","1979","1979","1979","1983","1983","1983","1983","1987","1987","1987","1987","1992","1992","1992","1992","1992","1996","1996","1996","1996","1996","1999","1999","1999","1999","1999","1999","2003","2003","2003","2003","2003","2007","2007","2007","2007","2007","2011","2011","2011","2011","2011","2011","2015","2015","2015","2015","2015","2015","2019","2019","2019","2019","2019"]
 var countryList = ["WIN","NZL","AUS","WIN","WIN","WIN","ENG","WIN","IND","ENG","IND","IND","AUS","ENG","AUS","AUS","PAK","NZL","PAK","PAK","NZL","SRL","IND","IND","SRL","SRL","AUS","IND","AUS","NZL","AUS","SAF","AUS","IND","SRL","AUS","IND","AUS","AUS","AUS","AUS","AUS","IND","SRL","PAK","IND","IND","IND","AUS","NZL","AUS","NZL","AUS","AUS","ENG","IND","AUS","ENG","NZL",] 
 var catgTypeList = ["WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MW","MF","PS","WC","MR","MW","MF","PS",]
@@ -150,13 +183,13 @@ function intialize() {
             clue.id = clueindex;
             clue.classList.add("clue-ball");
 			if (clueindex == 0){	
-            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Category</div>';
+            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Year</div>';
 			}
 			else if (clueindex == 1){	
             clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Country</div>';
 			}
 			else if (clueindex == 2){	
-            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Year</div>';
+            clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">Category</div>';
 			}	
 			else if (clueindex == 3){	
             clue.innerHTML = '<img class="image" src="ball.png" alt="Alt text"/><div class="centered">FN FL</div>';
