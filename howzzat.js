@@ -240,17 +240,17 @@ function intialize() {
     //}	
 	
     // Create the key board
-    let keyboard = [
+/*     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
         ["Enter", "Z", "X", "C", "V", "B", "N", "M", "⌫" ]
-    ]
+    ] */
 	
-/*     let keyboard = [
+     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-        ["A", "S", "D", "F", "G", "H", "J", "K", "L", " "],
+        ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Clr"],
         ["Enter", "Z", "X", "C", "V", "B", "N", "M", "⌫" ]
-    ]	 */
+    ]	 
 
     for (let i = 0; i < keyboard.length; i++) {
         let currRow = keyboard[i];
@@ -267,6 +267,9 @@ function intialize() {
             }
             else if (key == "⌫") {
                 keyTile.id = "Backspace";
+            }
+            else if (key == "Clr") {
+                keyTile.id = "Clr";
             }
             else if ("A" <= key && key <= "Z") {
                 keyTile.id = "Key" + key; // "Key" + "A";
@@ -319,7 +322,13 @@ function processInput(e) {
         currTile.innerText = "";
 		document.getElementById("answer").innerText = "";
     }
-
+    else if (e.code == "Clr") {
+ 		for (let c = col-1; c >= 0; c--) {
+			let currTile = document.getElementById(1 + '-' + c.toString());
+			currTile.innerText = "";
+			col -= 1;
+		} 
+	}
     else if (e.code == "Enter") {
         update();
     }
@@ -359,11 +368,11 @@ function update() {
 	else{
 		document.getElementById("answer").style.color = "red";
 		document.getElementById("answer").innerText = "Incorrect Guess! \n Please try again.";
-		for (let c = col-1; c >= 0; c--) {
+/* 		for (let c = col-1; c >= 0; c--) {
 			let currTile = document.getElementById(1 + '-' + c.toString());
 			currTile.innerText = "";
 			col -= 1;
-		}		
+		}	 */	
 	}
 
 }

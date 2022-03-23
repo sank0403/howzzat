@@ -165,7 +165,7 @@ hr {
 
 .key-tile {
     width: 36px;
-    height: 45px;
+    height: 55px;
     margin: 1px;
     border: 1px solid lightgray;
     border-radius: 25%;
@@ -179,7 +179,7 @@ hr {
 
 .enter-key-tile {
     width: 76px;
-    height: 45px;
+    height: 55px;
     margin: 1px;
     border: 1px solid lightgray;
     border-radius: 15%;
