@@ -281,9 +281,11 @@ hr {
   }
   .key-tile {
     width: 31px;
+    height: 50px;
   } 
   .enter-key-tile {
     width: 64px;
+    height: 50px;
   }   
   #board, #clue  {
     width: 325px;
@@ -302,9 +304,11 @@ hr {
   }
   .key-tile {
     width: 26px;
+    height: 50px;	
   } 
   .enter-key-tile {
     width: 60px;
+    height: 50px;	
   }   
   #board, #clue,  {
     width: 275px;
