@@ -323,10 +323,15 @@ function processInput(e) {
 		document.getElementById("answer").innerText = "";
     }
     else if (e.code == "Clr") {
- 		for (let c = col-1; c >= 0; c--) {
-			let currTile = document.getElementById(1 + '-' + c.toString());
-			currTile.innerText = "";
-			col -= 1;
+		if (confirm('Are you sure you want to clear the entry?')) {
+		  // Clear it!
+			for (let c = col-1; c >= 0; c--) {
+				let currTile = document.getElementById(1 + '-' + c.toString());
+				currTile.innerText = "";
+				col -= 1;
+			}
+		} else {
+		  // Do nothing!
 		} 
 	}
     else if (e.code == "Enter") {
