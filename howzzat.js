@@ -277,7 +277,7 @@ function intialize() {
 
             keyTile.addEventListener("click", processKey);
 
-            if (key == "Enter") {
+            if (key == "Enter" || key == "⌫") {
                 keyTile.classList.add("enter-key-tile");
             } else {
                 keyTile.classList.add("key-tile");
