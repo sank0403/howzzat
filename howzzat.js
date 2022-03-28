@@ -320,6 +320,7 @@ function processInput(e) {
         }
         let currTile = document.getElementById(1 + '-' + col.toString());
         currTile.innerText = "";
+		currTile.classList.remove("correct","present");		
 		document.getElementById("answer").innerText = "";
     }
     else if (e.code == "Clr") {
@@ -328,6 +329,7 @@ function processInput(e) {
 			for (let c = col-1; c >= 0; c--) {
 				let currTile = document.getElementById(1 + '-' + c.toString());
 				currTile.innerText = "";
+				currTile.classList.remove("correct","present");				
 				col -= 1;
 			}
 		} else {
@@ -342,11 +344,27 @@ function processInput(e) {
 function update() {
     let guess = "";
     document.getElementById("answer").innerText = "";
+	
+    let letterCount = {}; //keep track of letter frequency, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
+    for (let i = 0; i < answername.length; i++) {
+        let letter = answername[i];
+
+        if (letterCount[letter]) {
+           letterCount[letter] += 1;
+        } 
+        else {
+           letterCount[letter] = 1;
+        }
+    }	
 
     //string up the guesses into the word
     for (let c = 0; c < width; c++) {
         let currTile = document.getElementById(1 + '-' + c.toString());
         let letter = currTile.innerText;
+		if (answername[c] == letter.toLowerCase()) {
+			currTile.classList.add("correct");
+			letterCount[letter.toLowerCase()] -= 1;
+		}		
         guess += letter;
     }
 
@@ -380,4 +398,17 @@ function update() {
 		}	 */	
 	}
 
+    //go again and mark which ones are present but in wrong position
+    for (let c = 0; c < width; c++) {
+        let currTile = document.getElementById(1 + '-' + c.toString());
+        let letter = currTile.innerText;
+        // skip the letter if it has been marked correct
+        if (!currTile.classList.contains("correct")) {
+            //Is it in the word?         //make sure we don't double count
+            if (answername.includes(letter.toLowerCase()) && letterCount[letter.toLowerCase()] > 0) {
+                currTile.classList.add("present");	
+                letterCount[letter.toLowerCase()] -= 1;
+            } 			
+        }
+    }	
 }
