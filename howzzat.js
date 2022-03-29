@@ -96,8 +96,8 @@ var catgTypeList = ["WC","MR","MW","MF","WC","MR","MW","MF","WC","MR","MW","MF",
 var firstnameList = ["Clive","Glenn","Gary","Clive","Clive","Gordon","Mike","Vivian","Kapil","David","Roger","Mohinder","Allan","Graham","Craig","David","Imran","Martin","Wasim","Wasim","Martin","Arjuna","Sachin","Anil","Aravinda","Sanath","Steve","Rahul","Shane","Geoff","Shane","Lance","Ricky","Sachin","Chaminda","Ricky","Sachin","Ricky","Matthew","Glenn","Adam","Glenn","Mahendra","Tillakaratne","Shahid","Zaheer","Mahendra","Yuvraj","Michael","Martin","Mitchell","Trent","James","Mitchell","Eoin","Rohit","Mitchell","Ben","Kane",]
 var lastnameList = ["Lloyd","Turner","Gilmour","Lloyd","Lloyd","Greenidge","Hendrick","Richards","Dev","Gower","Binny","Amarnath","Border","Gooch","McDermott","Boon","Khan","Crowe","Akram","Akram","Crowe","Ranatunga","Tendulkar","Kumble","deSilva","Jayasuriya","Waugh","Dravid","Warne","Allott","Warne","Klusener","Ponting","Tendulkar","Vaas","Ponting","Tendulkar","Ponting","Hayden","McGrath","Gilchrist","McGrath","SinghDhoni","Dilshan","Afridi","Khan","SinghDhoni","Singh","Clarke","Guptill","Starc","Boult","Faulkner","Starc","Morgan","Sharma","Starc","Stokes","Williamson",]
 var index = [Math.floor(Math.random()*yearList.length)];
-var firstname = firstnameList[index];
-var lastname = lastnameList[index];
+var firstname = firstnameList[index].toLowerCase();
+var lastname = lastnameList[index].toLowerCase();
 var year = yearList[index];
 var catg = catgTypeList[index];
 var fnfl = firstname.slice(0, 1).toUpperCase();
@@ -368,7 +368,32 @@ function update() {
     let guess = "";
     document.getElementById("answer").innerText = "";
 	
-    let letterCount = {}; //keep track of letter frequency, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
+    let fnletterCount = {}; //keep track of letter frequency first name, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
+    for (let i = 0; i < fnwidth; i++) {
+        let letter = firstname[i];
+
+        if (fnletterCount[letter]) {
+           fnletterCount[letter] += 1;
+        } 
+        else {
+           fnletterCount[letter] = 1;
+        }
+    }	
+	
+
+    let lnletterCount = {}; //keep track of letter frequency last name, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
+    for (let i = 0; i < lnwidth; i++) {
+        let letter = lastname[i];
+
+        if (lnletterCount[letter]) {
+           lnletterCount[letter] += 1;
+        } 
+        else {
+           lnletterCount[letter] = 1;
+        }
+    }		
+	
+/*     let letterCount = {}; //keep track of letter frequency, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
     for (let i = 0; i < answername.length; i++) {
         let letter = answername[i];
 
@@ -378,18 +403,29 @@ function update() {
         else {
            letterCount[letter] = 1;
         }
-    }	
+    } */
 
     //string up the guesses into the word
-    for (let c = 0; c < width; c++) {
+	//first name
+    for (let c = 0; c < fnwidth; c++) {
         let currTile = document.getElementById(1 + '-' + c.toString());
         let letter = currTile.innerText;
 		if (answername[c] == letter.toLowerCase()) {
 			currTile.classList.add("correct");
-			letterCount[letter.toLowerCase()] -= 1;
+			fnletterCount[letter.toLowerCase()] -= 1;
 		}		
         guess += letter;
     }
+	//last name
+    for (let c = fnwidth; c < width; c++) {
+        let currTile = document.getElementById(1 + '-' + c.toString());
+        let letter = currTile.innerText;
+		if (answername[c] == letter.toLowerCase()) {
+			currTile.classList.add("correct");
+			lnletterCount[letter.toLowerCase()] -= 1;
+		}		
+        guess += letter;
+    }	
 
     guess = guess.toLowerCase(); //case sensitive
 	
@@ -422,15 +458,30 @@ function update() {
 	}
 
     //go again and mark which ones are present but in wrong position
-    for (let c = 0; c < width; c++) {
+	//first name
+    for (let c = 0; c < fnwidth; c++) {
         let currTile = document.getElementById(1 + '-' + c.toString());
         let letter = currTile.innerText;
         // skip the letter if it has been marked correct
         if (!currTile.classList.contains("correct")) {
             //Is it in the word?         //make sure we don't double count
-            if (answername.includes(letter.toLowerCase()) && letterCount[letter.toLowerCase()] > 0) {
+            if (firstname.includes(letter.toLowerCase()) && fnletterCount[letter.toLowerCase()] > 0) {
                 currTile.classList.add("present");	
-                letterCount[letter.toLowerCase()] -= 1;
+                fnletterCount[letter.toLowerCase()] -= 1;
+            } 			
+        }
+    }
+	//last name
+	
+    for (let c = fnwidth; c < width; c++) {
+        let currTile = document.getElementById(1 + '-' + c.toString());
+        let letter = currTile.innerText;
+        // skip the letter if it has been marked correct
+        if (!currTile.classList.contains("correct")) {
+            //Is it in the word?         //make sure we don't double count
+            if (lastname.includes(letter.toLowerCase()) && lnletterCount[letter.toLowerCase()] > 0) {
+                currTile.classList.add("present");	
+                lnletterCount[letter.toLowerCase()] -= 1;
             } 			
         }
     }	
